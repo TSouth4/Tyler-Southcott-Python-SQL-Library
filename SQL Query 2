@@ -1,0 +1,12 @@
+SELECT 
+  c.customer_id, 
+  c.first_name, 
+  c.last_name, 
+  SUM(o.total_amount) as total_spending
+FROM sql_store.orders o
+JOIN sql_store.customers c 
+  ON o.customer_id = c.customer_id
+WHERE o.order_date BETWEEN '2022-01-01' AND '2022-12-31'
+GROUP BY c.customer_id, c.first_name, c.last_name
+ORDER BY total_spending DESC
+LIMIT 10;
